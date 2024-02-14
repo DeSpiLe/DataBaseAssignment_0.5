@@ -12,17 +12,17 @@ public class TableController {
         this.repository = repository;
     }
 
-    public String createTable(String firstName,String secondName,short capacity, String reserved,String phoneNumber) {
+    public String createTable(String firstName, String secondName, short capacity, String reserved, String phoneNumber) {
         boolean reserve = reserved.toLowerCase().equals("yes");
-        Table table = new Table(firstName,secondName,capacity,reserve,phoneNumber);
+        Table table = new Table(firstName, secondName, capacity, reserve, phoneNumber);
         boolean created = repository.createTable(table);
 
-        return (created?"Table has been created" : "Table creation failed");
+        return (created ? "Table has been created" : "Table creation failed");
     }
 
     public String getTable(short id) {
         Table table = repository.getTable(id);
-        return (table==null ? "404 Table was not found": table.toString());
+        return (table == null ? "404 Table was not found" : table.toString());
     }
 
     public String getAllTables() {
@@ -39,5 +39,13 @@ public class TableController {
         }
     }
 
-    // Reserve and Edit doesn't ready
+    public String reserveTable(short id) {
+        boolean reserved = repository.reserveTable(id);
+        return (reserved ? "Table has been reserved" : "Table reservation failed");
+    }
+
+    public String editTableInfo(short id, String firstName, String secondName, short capacity, String phoneNumber) {
+        boolean edited = repository.editInfo(id, firstName, secondName, capacity, phoneNumber);
+        return (edited ? "Table information has been updated" : "Failed to update table information");
+    }
 }
