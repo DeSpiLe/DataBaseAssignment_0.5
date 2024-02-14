@@ -93,12 +93,7 @@ public class MyApp {
         System.out.println(response);
     }
 
-    private void reserveTable() {
-        System.out.println("Please enter number(id) of table");
-        short id = scanner.nextShort();
-        String response = controller.reserveTable(id);
-        System.out.println(response);
-    }
+
 
     private void editTableInfo() {
         System.out.println("Please enter number(id) of table to edit:");
