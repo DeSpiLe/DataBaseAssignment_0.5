@@ -4,12 +4,13 @@ import org.example.controllers.TableController;
 import org.example.models.Table;
 
 import javax.swing.table.TableCellEditor;
+import java.sql.Connection;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class MyApp {
-private final TableController controller;
-private final Scanner scanner;
+    private final TableController controller;
+    private final Scanner scanner;
 
     public MyApp(TableController controller) {
         this.controller = controller;
@@ -24,8 +25,8 @@ private final Scanner scanner;
             System.out.println("1.Get all tables");
             System.out.println("2.Get table by number(id)");
             System.out.println("3.Create new table");
-            //System.out.println("4.Reserve table");
-            //System.out.println("5.Edit information about table by id");
+            System.out.println("4.Reserve table");
+            System.out.println("5.Edit information about table by id");
             System.out.println("0.Exit");
             System.out.println();
             try {
@@ -43,6 +44,15 @@ private final Scanner scanner;
                         break;
                     case 3:
                         createTableMenu();
+                        break;
+                    case 4:
+                        reserveTable();
+                        break;
+                    case 5:
+                        editTableInfo();
+                        break;
+                    default:
+                        System.out.println("Invalid option. Please try again.");
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Input must be integer: " + e);
@@ -67,9 +77,8 @@ private final Scanner scanner;
         System.out.println("Enter phone number of guest");
         String phoneNumber = scanner.next();
 
-        String response = controller.createTable(name,surname,capacity,reserved,phoneNumber);
+        String response = controller.createTable(name, surname, capacity, reserved, phoneNumber);
         System.out.println(response);
-
     }
 
     private void getTableByIdMenu() {
@@ -77,12 +86,33 @@ private final Scanner scanner;
         short id = scanner.nextShort();
         String response = controller.getTable(id);
         System.out.println(response);
-
     }
 
     private void getAllTablesMenu() {
         String response = controller.getAllTables();
         System.out.println(response);
     }
-    
+
+    private void reserveTable() {
+        System.out.println("Please enter number(id) of table");
+        short id = scanner.nextShort();
+        String response = controller.reserveTable(id);
+        System.out.println(response);
+    }
+
+    private void editTableInfo() {
+        System.out.println("Please enter number(id) of table to edit:");
+        short id = scanner.nextShort();
+        System.out.println("Enter new first name:");
+        String firstName = scanner.next();
+        System.out.println("Enter new second name:");
+        String secondName = scanner.next();
+        System.out.println("Enter new capacity:");
+        short capacity = scanner.nextShort();
+        System.out.println("Enter new phone number:");
+        String phoneNumber = scanner.next();
+
+        String response = controller.editTableInfo(id, firstName, secondName, capacity, phoneNumber);
+        System.out.println(response);
+    }
 }
