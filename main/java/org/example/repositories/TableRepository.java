@@ -114,7 +114,7 @@ public class TableRepository implements ITableRepository {
             con = db.getConnection();
             String sql = "UPDATE tables SET reserved = ? WHERE id = ?";
             PreparedStatement statement = con.prepareStatement(sql);
-            statement.setBoolean(1, false); // Здесь изменено значение на true, так как резервируем столик
+            statement.setBoolean(1, false);
             statement.setShort(2, id);
             int rowsUpdated = statement.executeUpdate();
             return rowsUpdated > 0;
