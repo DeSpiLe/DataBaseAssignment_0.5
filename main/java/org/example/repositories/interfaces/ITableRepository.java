@@ -10,4 +10,5 @@ public interface ITableRepository {
  List<Table> getAllTables();
  boolean reserveTable(short id);
  boolean editInfo(short id, String firstName, String secondName, short capacity, String phoneNumber);
+ boolean deleteTable(short id);
 }

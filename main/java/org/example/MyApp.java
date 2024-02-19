@@ -20,17 +20,18 @@ public class MyApp {
     public void start() {
         boolean isRunning=true;
         while (isRunning) {
-            System.out.println("Welcome to AFRT (Application For Reserving Tables)");
+            System.out.println("Welcome to Application For Reserving Tables :)");
             System.out.println("Select option");
             System.out.println("1.Get all tables");
             System.out.println("2.Get table by number(id)");
             System.out.println("3.Create new table");
-            System.out.println("4.Reserve table");
-            System.out.println("5.Edit information about table by id");
+            System.out.println("4.Reserve table by number(id)");
+            System.out.println("5.Edit information about table by number(id)");
+            System.out.println("6.Delete table by number(id)");
             System.out.println("0.Exit");
             System.out.println();
             try {
-                System.out.println("Enter option(1-5): ");
+                System.out.println("Enter option(0-6): ");
                 int option = scanner.nextInt();
                 switch (option) {
                     case 0:
@@ -51,12 +52,15 @@ public class MyApp {
                     case 5:
                         editTableInfo();
                         break;
+                    case 6:
+                        deleteTableById();
+                        break;
                     default:
                         System.out.println("Invalid option. Please try again.");
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Input must be integer: " + e);
-                scanner.nextLine(); // to ignore incorrect input
+                scanner.nextLine();
             }
             catch (Exception e) {
                 System.out.println(e.getMessage());
@@ -64,6 +68,14 @@ public class MyApp {
 
             System.out.println("*************************");
         }
+    }
+
+    private void deleteTableById() {
+        System.out.println("Please enter number(id) of table");
+        short id = scanner.nextShort();
+        String response = controller.deleteTable(id);
+        System.out.println(response);
+        scanner.nextLine();
     }
 
     private void createTableMenu() {

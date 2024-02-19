@@ -48,4 +48,9 @@ public class TableController {
         boolean edited = repository.editInfo(id, firstName, secondName, capacity, phoneNumber);
         return (edited ? "Table information has been updated" : "Failed to update table information");
     }
+
+    public String deleteTable(short id) {
+        boolean deleted = repository.deleteTable(id);
+        return (deleted ? "Table has been deleted" : "Table deletion failed");
+    }
 }

@@ -157,4 +157,32 @@ public class TableRepository implements ITableRepository {
         }
         return false;
     }
+
+    @Override
+    public boolean deleteTable(short id) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        try {
+            con = db.getConnection();
+            String sql = "DELETE FROM tables WHERE id = ?";
+            ps = con.prepareStatement(sql);
+            ps.setShort(1, id);
+            int rowsAffected = ps.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            System.out.println("sql error: " + e.getMessage());
+            return false;
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("sql error: " + e.getMessage());
+            }
+        }
+    }
 }
